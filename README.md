@@ -28,12 +28,12 @@ npm run dev
 L'application est accessible sur `http://localhost:5173`.
 
 ## API mock
-Les données (biens, avis) sont servies par une fausse API [json-server](https://github.com/typicode/json-server), située dans le dossier `api/`, à part du projet React.
+Les données (biens, avis) sont servies par une fausse API [json-server](https://github.com/typicode/json-server), située dans le dossier `api/`, À PART part du projet React, pas celui dedans. Il faudra le créer.
 
 Dans un second terminal :
 ```bash
 cd api
-npx json-server@0.17.4 db.json --port 4000
+npx json-server@0.17.4 db.json --watch --port 4000
 ```
 L'API est accessible sur `http://localhost:4000` (ex. `/biens`, `/avis`).
 
