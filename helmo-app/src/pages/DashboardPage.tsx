@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router";
-import { fetchProperties } from "../api/properties";
+import { Link, useLoaderData } from "react-router";
+import { ROUTES } from "../routes";
 import type { Bien } from "../types/bien";
 
 const formatPrix = (bien: Bien) =>
@@ -11,24 +10,11 @@ const formatPrix = (bien: Bien) =>
   }).format(bien.price);
 
 export default function DashboardPage() {
-  const [biens, setBiens] = useState<Bien[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetchProperties()
-      .then((data) => setBiens(data))
-      .catch((err: unknown) => {
-        setError(err instanceof Error ? err.message : "Erreur inconnue");
-      })
-      .finally(() => setLoading(false));
-  }, []);
+  // Données chargées par dashboardLoader ; erreurs gérées par RouteError
+  const biens = useLoaderData<Bien[]>();
 
   const totalVente = biens.filter((b) => b.status === "sale").length;
   const totalLocation = biens.filter((b) => b.status === "rent").length;
-
-  if (loading) return <p className="page-lead">Chargement…</p>;
-  if (error) return <p className="page-lead" style={{ color: "red" }}>{error}</p>;
 
   return (
     <>
@@ -67,7 +53,7 @@ export default function DashboardPage() {
             {biens.map((bien) => (
               <tr key={bien.id}>
                 <td>
-                  <Link to={`/biens/${bien.id}`} className="dashboard__link">
+                  <Link to={ROUTES.bien(bien.id)} className="dashboard__link">
                     {bien.title}
                   </Link>
                 </td>

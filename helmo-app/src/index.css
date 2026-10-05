@@ -277,6 +277,75 @@ code {
   .badge--rent { background: #1e3a5f; color: #93c5fd; }
 }
 
+/* ─── FilterBar ──────────────────────────────────────────── */
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 16px;
+  padding: 20px 24px;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 28px;
+  text-align: left;
+}
+
+.filter-bar__group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1 1 180px;
+}
+
+.filter-bar__label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-h);
+  letter-spacing: 0.3px;
+}
+
+.filter-bar__control {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text-h);
+  font-size: 15px;
+  font-family: var(--sans);
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+
+  &:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-bg);
+  }
+}
+
+.filter-bar__actions {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  padding-bottom: 1px;
+}
+
+/* Message "aucun résultat" */
+.filter-empty {
+  padding: 48px 0;
+  font-size: 17px;
+  color: var(--text);
+}
+
+.filter-empty__link {
+  color: var(--accent);
+  font-weight: 500;
+
+  &:hover { text-decoration: underline; }
+}
+
 /* ─── Grille de cartes ────────────────────────────────────── */
 
 .grid {
@@ -461,6 +530,14 @@ code {
   padding-top: 8px;
 }
 
+/* ─── Map ─────────────────────────────────────────────────── */
+
+.map {
+  height: 70vh;
+  width: 100%;
+  border-radius: 8px;
+}
+
 /* ─── Dashboard ───────────────────────────────────────────── */
 
 .dashboard__stats {
@@ -575,4 +652,11 @@ code {
 
 .not-found__cta {
   margin-top: 8px;
+}
+
+/* Carte MapLibre : hauteur obligatoire sinon la carte est invisible */
+.map {
+  height: 70vh;
+  width: 100%;
+  border-radius: 8px;
 }

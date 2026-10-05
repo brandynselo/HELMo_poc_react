@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import { ROUTES } from "../routes";
 import type { Bien } from "../types/bien";
 
 const formatPrix = (bien: Bien) => {
@@ -29,7 +30,7 @@ export default function PropertyCard({ bien }: { bien: Bien }) {
           {bien.landArea > 0 && <li>{bien.landArea} m²</li>}
         </ul>
         {/* Lien de navigation vers la page de détail */}
-        <Link to={`/biens/${bien.id}`} className="card__cta">
+        <Link to={ROUTES.bien(bien.id)} className="card__cta">
           Voir le bien →
         </Link>
       </div>

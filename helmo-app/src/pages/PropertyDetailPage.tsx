@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router";
-import { fetchPropertyById } from "../api/properties";
+import { Link, useLoaderData } from "react-router";
+import { ROUTES } from "../routes";
 import type { Bien } from "../types/bien";
 
 const formatPrix = (bien: Bien) => {
@@ -13,29 +12,12 @@ const formatPrix = (bien: Bien) => {
 };
 
 export default function PropertyDetailPage() {
-  const { id } = useParams<{ id: string }>();
-  const [bien, setBien] = useState<Bien | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (!id) return;
-    setLoading(true);
-    fetchPropertyById(id)
-      .then((data) => setBien(data))
-      .catch((err: unknown) => {
-        setError(err instanceof Error ? err.message : "Erreur inconnue");
-      })
-      .finally(() => setLoading(false));
-  }, [id]);
-
-  if (loading) return <p className="page-lead">Chargement…</p>;
-  if (error) return <p className="page-lead" style={{ color: "red" }}>{error}</p>;
-  if (!bien) return <p className="page-lead">Bien introuvable.</p>;
+  // Données chargées par bienLoader ; erreurs gérées par RouteError
+  const bien = useLoaderData<Bien>();
 
   return (
     <div className="detail">
-      <Link to="/" className="detail__back">← Retour à la liste</Link>
+      <Link to={ROUTES.home} className="detail__back">← Retour à la liste</Link>
 
       <div className="detail__hero">
         <img src={bien.imageUrl} alt={bien.title} />
